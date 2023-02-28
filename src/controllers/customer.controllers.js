@@ -3,7 +3,7 @@ const custumerService = require("../services/customer.services");
 const getAllCustomers = async (req, res) => {
     try {
         const result = await custumerService.allCustomers();
-        res.status(200).json({ message: "Available vehicles ", result });
+        res.status(200).json({ message: "Available Customer ", result });
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
@@ -20,6 +20,7 @@ const createCustomer = async (req, res) => {
             res.status(400).json({ message: "Something wrong" });
         }
     } catch (error) {
+        console.log(error.message );
         res.status(400).json({ error: error.message });
     }
 };

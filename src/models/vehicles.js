@@ -46,13 +46,6 @@ class vehicles extends Sequelize.Model {
     timestamps: false,
     indexes: [
       {
-        name: "vehicles_dni_key",
-        unique: true,
-        fields: [
-          { name: "dni" },
-        ]
-      },
-      {
         name: "vehicles_pkey",
         unique: true,
         fields: [

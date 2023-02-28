@@ -5,7 +5,8 @@ const sellerRoutes = require("./seller.routes");
 const customerRoutes = require("./customer.routes");
 const billRoutes = require("./bill.routes");
 const transactionRoutes = require("./transaction.routes");
-const liqVenRoutes = require("./liquidationVeh.routes");
+const liqVehRoutes = require("./liquidationVeh.routes");
+const authMiddleware = require("../middlewares/auth.middlewares");
 
 
 const routerApi = (app) => {
@@ -63,8 +64,8 @@ const routerApi = (app) => {
     // - /api/v1/payments/:id/del  ---> Elimina Un pago por id
     // - /api/v1/payments/:id/update  ---> edita un pago por id
 
-    //Rutas de Liquidacion de vendedor
-    app.use("/api/v1/liquidation/veh", liqVenRoutes);
+    //Rutas de Liquidacion de Veh
+    app.use("/api/v1/liquidation/veh", liqVehRoutes);
     // - /api/v1/liquidation/veh/new  ---> Permite crear una nueva Liquidacion de vehiculo 
     // - /api/v1/liquidation/veh/:i--> Retorna una liquidacion de veh por su id
     // - /api/v1/liquidation/veh/all  ---> Retorna todos las liquidaciones de vehiculo

@@ -2,6 +2,8 @@ const vehService = require("../services/vehicle.services");
 
 const getAllVehicles = async (req, res) => {
     try {
+        console.log(req.body);
+        console.log(req.params);
         const result = await vehService.allVehicle();
         res.status(200).json({ message: "Available vehicles ", result });
     } catch (error) {
@@ -41,6 +43,7 @@ const searchIdVehicle = async (req, res) => {
 const deleteVehicle = async (req, res) => {
     try {
         const { id } = req.params;
+
         const result = await vehService.delete(id);
         if (result) {
             res.status(200).json({ message: "Required field removed with success", result });
@@ -56,6 +59,7 @@ const updateVehicle = async (req, res) => {
     try {
         const { id } = req.params;
         const data = req.body;
+        console.log(data);
         const result = await vehService.update(id, data);
         if (result.ok) {
             res.status(200).json({ message: "Item modified successfully", result });

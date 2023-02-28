@@ -27,6 +27,7 @@ const searchIdSeller = async (req, res) => {
 const createSeller = async (req, res) => {
     try {
         const seller = req.body;
+        console.log(seller);
         const result = await sellerService.create(seller);
         if (result) {
             res.status(201).json({ message: 'Seller created', result });
