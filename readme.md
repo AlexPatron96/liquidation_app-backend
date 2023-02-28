@@ -3,15 +3,15 @@
 3.- instalar las dependencia de desarrollo nodemon morgan
 4.- Estructura de Carpeta
 /src
----/services
----/models
----/controllers
----/routes
----/middlewares
----/seeders
----/tests
----/utils
----/templates
+    ---/services
+    ---/models
+    ---/controllers
+    ---/routes
+    ---/middlewares
+    ---/seeders
+    ---/tests
+    ---/utils
+    ---/templates
     app.js
     server.js
 5.- Scripts start y dev en package json.
