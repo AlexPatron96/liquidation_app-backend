@@ -35,20 +35,20 @@ const getRouteBill = async (req, res) => {
 const createBill = async (req, res) => {
     try {
         const data = req.body;
+        console.log("Alex");
         console.log(data);
-        let { num_Fact, isWhite } = data;
+        const { num_Fact, isWhite } = data;
         let isValid = false;
         console.log(num_Fact);
         if (!isWhite) {
-            const validator = /\d{3}\-\d{3}\-\d{9}/i;
-
+            const validator = /\d{3}\-\d{3}\-\d{9}/;
+            console.log(validator.test(num_Fact))
             if (validator.test(num_Fact)) {
                 console.log("SI CUMPLE LA VALIDACION");
                 isValid = true;
             } else {
                 res.status(400).json({ message: "El numero de factura no cumple con la validacion" });
             }
-
         } else {
             num = await genCod("FA-W-")
             data.num_Fact = num;
@@ -101,22 +101,21 @@ const deleteBill = async (req, res) => {
         const findBill = await billService.idBill(id);
         if (findBill) {
             const { num_Fact } = findBill;
-            const result = await billService.delete(id);
-            if (result) {
-                const findTrans = await transactionService.numFact(num_Fact);
-                if (findTrans) {
-                    console.log(findTrans.length);
-
-                    findTrans.map(async trans => {
-                        const del = await transactionService.delete(trans.id);
-                        if (del) {
-                            console.log("borro correctamen la transacion");
-                        } else {
-                            console.log("no borro correctamente la transacion");
-                        }
-                    });
+            const deleteLote = await transactionService.deleteLote(num_Fact);
+            if (deleteLote) {
+                console.log(deleteLote);
+                const result = await billService.delete(id);
+                if (result) {
+                    res.status(200).json({ message: "Required field removed with success", result, deleteLote });
                 }
-                res.status(200).json({ message: "Required field removed with success", result, findTrans });
+                // findTrans.map(async trans => {
+                //     // const del = await transactionService.delete(trans.id);
+                //     // if (del) {
+                //     //     console.log("borro correctamen la transacion");
+                //     // } else {
+                //     //     console.log("no borro correctamente la transacion");
+                //     // }
+                // });
             }
         } else {
             res.status(400).json({ message: 'The requested parameter does not exist.' });

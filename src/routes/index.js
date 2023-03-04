@@ -48,8 +48,8 @@ const routerApi = (app) => {
     // - /api/v1/customers/:id/update  ---> edita un Clientes por id
 
     //Rutas de Facturas
-    app.use("/api/v1/bill", billRoutes);
-    // - /api/v1/billnew  ---> Permite crear una nuevo Clientes
+    app.use("/api/v1/invoice", billRoutes);
+    // - /api/v1/bill/new  ---> Permite crear una nuevo Clientes
     // - /api/v1/bill/:id  ---> Retorna un Clientes por su id
     // - /api/v1/bill/all  ---> Retorna todos los Clientes
     // - /api/v1/bill/:id/del  ---> Elimina Un Clientes por id

@@ -41,9 +41,9 @@ function initModels(sequelize) {
   bills.hasMany(bills_liquidation_veh, { as: "bills_liquidation_vehs", foreignKey: "id_bills" });
 
   transaction.belongsTo(bills, { as: "id_bills_bill", foreignKey: "id_bills" });
-  bills.hasMany(transaction, { as: "transactions", foreignKey: "id_bills" });
+  bills.hasMany(transaction, { as: "id_transactions", foreignKey: "id_bills" });
 
-  bills.belongsTo(clients, { as: "client", foreignKey: "id_client" });
+  bills.belongsTo(clients, { as: "id_client_bill", foreignKey: "id_client", onDelete: 'SET NULL' });
   clients.hasMany(bills, { as: "bills", foreignKey: "id_client" });
 
   transaction.belongsTo(clients, { as: "id_client_client", foreignKey: "id_client" });
@@ -79,11 +79,11 @@ function initModels(sequelize) {
   vehicles.belongsTo(route, { as: "route", foreignKey: "id_route" });
   route.hasMany(vehicles, { as: "vehicles", foreignKey: "id_route" });
 
-  bills.belongsTo(sellers, { as: "seller", foreignKey: "id_sellers" });
+  bills.belongsTo(sellers, { as: "id_seller_client", foreignKey: "id_sellers" });
   sellers.hasMany(bills, { as: "bills", foreignKey: "id_sellers" });
 
-  clients.belongsTo(sellers, { as: "seller", foreignKey: "id_sellers" });
-  sellers.hasMany(clients, { as: "clients", foreignKey: "id_sellers" });
+  clients.belongsTo(sellers, { as: "seller", foreignKey: "id_sellers", onDelete: 'SET NULL' });
+  sellers.hasMany(clients, { as: "clients", foreignKey: "id_sellers", onDelete: 'SET NULL' });
 
   cuadre_sell.belongsTo(sellers, { as: "id_sellers_seller", foreignKey: "id_sellers" });
   sellers.hasMany(cuadre_sell, { as: "cuadre_sells", foreignKey: "id_sellers" });

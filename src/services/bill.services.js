@@ -7,13 +7,16 @@ class billService {
     static async all() {
         try {
             const result = await models.bills.findAll({
+                order: [
+                    ['id', 'DESC'],
+                ],
                 attributes: {
                     exclude: ["id_client", "id_sellers"]
                 },
                 include: [
                     {
                         model: models.clients,
-                        as: "client",
+                        as: "id_client_bill",
                         attributes: {
                             exclude: ["id_sellers", "id_route"]
                         },
@@ -26,11 +29,11 @@ class billService {
                     },
                     {
                         model: models.transaction,
-                        as: "transactions",
+                        as: "id_transactions",
                     },
                     {
                         model: models.sellers,
-                        as: "seller",
+                        as: "id_seller_client",
                     },
                 ],
             });
@@ -64,7 +67,7 @@ class billService {
                 include: [
                     {
                         model: models.clients,
-                        as: "client",
+                        as: "id_client_bill",
                         attributes: {
                             exclude: ["id_sellers", "id_route"]
                         },
@@ -79,11 +82,11 @@ class billService {
                     },
                     {
                         model: models.transaction,
-                        as: "transactions",
+                        as: "id_transactions",
                     },
                     {
                         model: models.sellers,
-                        as: "seller",
+                        as: "id_seller_client",
                     },
                 ],
             });
@@ -99,9 +102,9 @@ class billService {
                 include: {
                     model: models.clients,
                     as: "client",
-                    
-                    where:{
-                        id_route: dia, 
+
+                    where: {
+                        id_route: dia,
                     }
                 }
 

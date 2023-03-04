@@ -48,8 +48,9 @@ class sellerService {
 
     static async delete(id) {
         try {
+            const client = await models.clients.update({ id_sellers: null }, { where: { id } })
             const result = await models.sellers.destroy({ where: { id } });
-            return result;
+            return {result , client};
         } catch (error) {
             throw error;
         }

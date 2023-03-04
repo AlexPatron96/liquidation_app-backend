@@ -77,6 +77,18 @@ class transactionService {
             throw error;
         }
     };
+    static async deleteLote(data) {
+        try {
+            const result = await models.transaction.destroy({
+                where: {
+                    num_Fact: data
+                }
+            })
+            return result;
+        } catch (error) {
+            throw error;
+        }
+    };
 };
 
 module.exports = transactionService;
